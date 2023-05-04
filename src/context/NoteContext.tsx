@@ -16,7 +16,7 @@ const NoteProvider = ({ children }: PropsWithChildren) => {
 	}, [notes]);
 
 	const saveNote = (newNote: Note) => {
-		setNotes([...notes, newNote]);
+		setNotes([newNote, ...notes]);
 	};
 
 	const updateNote = (id: number) => {

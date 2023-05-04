@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Icon from './icons';
 
 interface TooltipProps {
-	noteId: number;
+	noteId: string;
 	usedColor?: string;
-	handleClick: (id: number, color: string) => void;
+	handleClick: (id: string, color: string) => void;
 }
 
 function Tooltip({ noteId, usedColor = '', handleClick }: TooltipProps) {

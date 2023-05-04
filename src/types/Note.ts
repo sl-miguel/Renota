@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export interface Note {
-	id: number;
+	id: string;
 	title: string;
 	content: string;
 	color: string;
@@ -10,6 +10,6 @@ export interface Note {
 export type NoteContextType = {
 	notes: Note[];
 	saveNote: (note: Note) => void;
-	updateNote: (id: number) => void;
+	updateNote: (id: string) => void;
 	setNotes: Dispatch<SetStateAction<Note[]>>;
 };

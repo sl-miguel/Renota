@@ -6,12 +6,12 @@ import { NoteContextType } from '../types/Note';
 
 interface NoteProps {
 	note: {
-		id: number;
+		id: string;
 		title: string;
 		content: string;
 		color: string;
 	};
-	handleColor: (id: number, color: string) => void;
+	handleColor: (id: string, color: string) => void;
 }
 
 function Note({ note, handleColor }: NoteProps) {
@@ -28,7 +28,7 @@ function Note({ note, handleColor }: NoteProps) {
 
 	return (
 		<div
-			className={`card relative ${animation ? 'fall' : 'landing'} break-inside-avoid-column mb-4 p-4 rounded-xl bg-dark-700`}
+			className={`card relative ${animation ? 'fall' : 'landing'} break-inside-avoid-column mb-4 p-4 rounded-xl bg-dark-900 border border-dark-800`}
 			style={{ background: note.color }}>
 			{note.title && <h3 className='text-xl my-2 font-semibold'>{note.title}</h3>}
 			{note.content && <p>{note.content}</p>}

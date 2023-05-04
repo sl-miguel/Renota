@@ -3,14 +3,17 @@ import Editable from './Editable';
 import Icon from './icons';
 import { NoteContext } from '../context/NoteContext';
 import { Note, NoteContextType } from '../types/Note';
-import Tooltip from './Tooltip';
+import { uid } from '../utils/uid';
+import { random } from '../utils/random';
+import { colors } from '../utils/constants';
 
 function Search() {
-	const { setNotes } = useContext(NoteContext) as NoteContextType;
+	const { saveNote } = useContext(NoteContext) as NoteContextType;
 
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
-	const [color, setColor] = useState('');
+	const [previousColor, setPreviousColor] = useState<string | undefined>(undefined);
+
 	const [resetKey, setResetKey] = useState(0);
 
 	const [focus, setFocus] = useState(false);
@@ -22,9 +25,7 @@ function Search() {
 	}, []);
 
 	const handleOutside = (event: MouseEvent) => {
-		if (ref.current && !ref.current.contains(event.target as Node)) {
-			setFocus(false);
-		}
+		if (ref.current && !ref.current.contains(event.target as Node)) setFocus(false);
 	};
 
 	const expand = () => {
@@ -32,45 +33,37 @@ function Search() {
 	};
 
 	const submitData = () => {
-		console.log('Submiting data..');
 		if (!title && !content) return resetForm();
 
+		const availableColors = colors.filter((color) => color !== previousColor);
+		const color = random(availableColors);
+		setPreviousColor(color);
+
 		const newNote: Note = {
-			id: Date.now(),
+			id: uid(),
 			title,
 			content,
 			color,
 		};
 
-		setNotes((prev) => [...prev, newNote]);
+		saveNote(newNote);
 		resetForm();
 	};
 
 	const resetForm = () => {
 		setTitle('');
 		setContent('');
-		setColor('');
+		setFocus(false);
 		setResetKey((prev) => (prev += 1));
 	};
 
-	const handleColor = (_id: number, color: string) => {
-		setColor(color);
-	};
-
-	console.log(title, content, color);
-
 	return (
 		<div key={resetKey} ref={ref} className='flex flex-col-reverse bg-dark-900 border border-dark-800 rounded-xl max-w-4xl mx-auto'>
-			<div className={`p-4 flex items-center justify-end gap-4 ${focus ? 'block' : 'hidden'}`}>
-				<div>
-					<Tooltip noteId={0} handleClick={handleColor} />
-				</div>
-				<div onClick={submitData}>
+			<div className='relative' onFocus={expand}>
+				<Editable content={content} setContent={setContent} placeholder='New Note..' order={1} />
+				<div onClick={submitData} className='shake | absolute right-0 top-0 bottom-0 flex justify-center items-center pr-4 cursor-pointer'>
 					<Icon name='send' size={20} />
 				</div>
-			</div>
-			<div onFocus={expand}>
-				<Editable content={content} setContent={setContent} placeholder='New Note..' order={1} />
 			</div>
 			<div className={focus ? 'block' : 'hidden'}>
 				<Editable content={title} setContent={setTitle} placeholder='Title' order={2} />
