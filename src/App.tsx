@@ -22,8 +22,10 @@ function App() {
 	return (
 		<div className=' mx-auto w-[97%]'>
 			<div className='my-10'>
-				<div onClick={debugNote} className='shake | flex flex-col items-center mb-6 cursor-pointer'>
-					<Logo size={170} />
+				<div className='flex flex-col items-center mb-6 cursor-pointer'>
+					<div onClick={debugNote} className='shake'>
+						<Logo size={170} />
+					</div>
 				</div>
 				<Search />
 			</div>
