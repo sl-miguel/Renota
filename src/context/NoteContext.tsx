@@ -19,18 +19,7 @@ const NoteProvider = ({ children }: PropsWithChildren) => {
 		setNotes([newNote, ...notes]);
 	};
 
-	const updateNote = (id: number) => {
-		notes.filter((note: Note) => {
-			if (note.id === id) {
-				note.color = 'red';
-				setNotes([...notes]);
-			}
-		});
-
-		setNotes([...notes]);
-	};
-
-	return <NoteContext.Provider value={{ notes, saveNote, updateNote, setNotes }}>{children}</NoteContext.Provider>;
+	return <NoteContext.Provider value={{ notes, saveNote, setNotes }}>{children}</NoteContext.Provider>;
 };
 
 export default NoteProvider;
