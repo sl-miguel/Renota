@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Test animation */
+.card.fall {
+	animation: falling forwards 1s ease-out 1;
+}
+
+@keyframes falling {
+	0% {
+		transform: rotateZ(0deg);
+		top: 0;
+		opacity: 1;
+	}
+	25% {
+		transform: rotateZ(-15deg);
+	}
+	100% {
+		top: 300px;
+		transform: rotateZ(-5deg);
+		opacity: 0;
+	}
+}
+
+.card.landing {
+	animation: landing forwards 1s ease-out 1;
+}
+
+@keyframes landing {
+	0% {
+		bottom: 10px;
+		opacity: 0;
+	}
+	100% {
+		bottom: 0;
+		opacity: 1;
+	}
+}
+
+.shake:hover {
+	animation: shaking 0.25s 3;
+}
+
+@keyframes shaking {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(5deg);
+	}
+	50% {
+		transform: rotate(0eg);
+	}
+	75% {
+		transform: rotate(-5deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
