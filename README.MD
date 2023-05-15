@@ -1,2 +1,1 @@
 - [ ] Editable notes
-- [ ] Fix Newline not working on notes

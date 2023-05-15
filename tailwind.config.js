@@ -8,6 +8,7 @@ export default {
 			sans: ['Sarabun', ...defaultTheme.fontFamily.sans],
 		},
 		colors: {
+			transparent: 'transparent',
 			white: '#ffffff',
 			black: '#000000',
 			'dark-700': '#888888',

@@ -3,6 +3,7 @@ import Tooltip from './Tooltip';
 import Icon from './icons';
 import { NoteContext } from '../context/NoteContext';
 import { NoteContextType } from '../types/Note';
+import Maker from './Maker';
 
 interface NoteProps {
 	note: {
@@ -26,12 +27,20 @@ function Note({ note, handleColor }: NoteProps) {
 		}, 1000);
 	};
 
+	const handleSave = (text: string) => {
+		console.log('Handling save..', text);
+	};
+
 	return (
 		<div
 			className={`card relative ${animation ? 'fall' : 'landing'} break-inside-avoid-column mb-4 p-4 rounded-xl bg-dark-900 border border-dark-800`}
 			style={{ background: note.color }}>
-			{note.title && <h3 className='text-xl my-2 font-semibold'>{note.title}</h3>}
-			{note.content && <p>{note.content}</p>}
+			{note.title && (
+				<h3 className='text-xl my-2 font-semibold'>
+					<Maker text={note.title} save={handleSave} />
+				</h3>
+			)}
+			{note.content && <Maker text={note.content} save={handleSave} />}
 			<div className='flex justify-end gap-3 pt-4'>
 				<div>
 					<Tooltip handleClick={handleColor} noteId={note.id} usedColor={note.color} />
