@@ -17,7 +17,7 @@ interface NoteProps {
 
 function Note({ note, handleColor }: NoteProps) {
 	const [animation, setAnimation] = useState(false);
-	const { setNotes } = useContext(NoteContext) as NoteContextType;
+	const { editNote, setNotes } = useContext(NoteContext) as NoteContextType;
 
 	const handleDelete = () => {
 		setAnimation(true);
@@ -27,8 +27,18 @@ function Note({ note, handleColor }: NoteProps) {
 		}, 1000);
 	};
 
-	const handleSave = (text: string) => {
-		console.log('Handling save..', text);
+	const handleSave = (text: string, key: string) => {
+		console.log('Handling save..', key, text);
+
+		const updatedNote = {
+			...note,
+			[key]: text,
+		};
+
+		console.log(updatedNote);
+
+		editNote(note.id, updatedNote);
+		// editNote(note.id, { ...note, [key]: text });
 	};
 
 	return (
@@ -37,10 +47,10 @@ function Note({ note, handleColor }: NoteProps) {
 			style={{ background: note.color }}>
 			{note.title && (
 				<h3 className='text-xl my-2 font-semibold'>
-					<Maker text={note.title} save={handleSave} />
+					<Maker keyName='title' text={note.title} save={handleSave} />
 				</h3>
 			)}
-			{note.content && <Maker text={note.content} save={handleSave} />}
+			{note.content && <Maker keyName='content' text={note.content} save={handleSave} />}
 			<div className='flex justify-end gap-3 pt-4'>
 				<div>
 					<Tooltip handleClick={handleColor} noteId={note.id} usedColor={note.color} />

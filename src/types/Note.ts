@@ -10,5 +10,6 @@ export interface Note {
 export type NoteContextType = {
 	notes: Note[];
 	saveNote: (note: Note) => void;
+	editNote: (id: string, updatedNote: Note) => void;
 	setNotes: Dispatch<SetStateAction<Note[]>>;
 };

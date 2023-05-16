@@ -19,7 +19,25 @@ const NoteProvider = ({ children }: PropsWithChildren) => {
 		setNotes([newNote, ...notes]);
 	};
 
-	return <NoteContext.Provider value={{ notes, saveNote, setNotes }}>{children}</NoteContext.Provider>;
+	// const editNote = (id: string, updatedNote: Note) => {
+	// 	setNotes((prev) => {
+	// 		const updatedNotes = [...prev];
+	// 		const noteIndex = updatedNotes.findIndex((note) => note.id === id);
+	// 		if (noteIndex !== -1) {
+	// 			updatedNotes[noteIndex] = updatedNote;
+	// 		}
+	// 		return updatedNotes;
+	// 	});
+	// };
+	const editNote = (id: string, updatedNote: Note) => {
+		console.log('Editing..', updatedNote);
+
+		setNotes((prev) => {
+			return prev.map((note) => (note.id === id ? updatedNote : note));
+		});
+	};
+
+	return <NoteContext.Provider value={{ notes, saveNote, editNote, setNotes }}>{children}</NoteContext.Provider>;
 };
 
 export default NoteProvider;
