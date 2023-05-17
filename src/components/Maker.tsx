@@ -37,10 +37,7 @@ function Maker({ text, keyName, save }: MakerProps) {
 	return (
 		<div ref={ref}>
 			{isEditing && <SizableArea text={content} handleChange={handleInput} />}
-			{/* {isEditing && <textarea className='max-w-full text-black' value={content} onChange={handleInput}></textarea>} */}
-			{/* {isEditing && <input onChange={handleInput} autoFocus={true} value={content} className='block w-full p-0 m-0 border-none bg-transparent' />} */}
-			{/* {!isEditing && <p onDoubleClick={handleDoubleClick} dangerouslySetInnerHTML={{ __html: content }}></p>} */}
-			{!isEditing && <p onDoubleClick={handleDoubleClick}>{content}</p>}
+			{!isEditing && <p onDoubleClick={handleDoubleClick} dangerouslySetInnerHTML={{ __html: content }}></p>}
 		</div>
 	);
 }
